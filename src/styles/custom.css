@@ -1,0 +1,121 @@
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Modal Dark Mode Theme Overrides */
+html.dark .menu-glass {
+  background-color: #07101c !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+html.dark .menu-glass a:not(.ximi-button),
+html.dark .menu-glass h2,
+html.dark .menu-glass p:not(.text-primary) {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+html.dark .menu-glass .text-slate-900 {
+  color: #ffffff !important;
+}
+html.dark .menu-glass .text-slate-400 {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+html.dark .menu-glass .text-primary {
+  color: #00d4ff !important;
+}
+html.dark .menu-glass button {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Wordmark Styles */
+.footer-wordmark .fw-letter {
+  display: inline-block;
+  font-weight: 900;
+  font-size: clamp(48px, 16vw, 220px);
+  line-height: 0.8;
+  position: relative;
+  transition: transform 0.4s ease;
+}
+
+.footer-wordmark .fw-lift {
+  position: relative;
+  display: inline-block;
+}
+
+.footer-wordmark .fw-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.15);
+}
+
+.footer-wordmark .fw-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #00d4ff;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.footer-wordmark .fw-letter:hover .fw-fill {
+  opacity: 0.9;
+  transform: translateY(-4px);
+}
+
+/* Sound EQ Animation */
+.sound-eq i {
+  animation: eqPulse 1.2s infinite ease-in-out alternate;
+}
+.sound-eq i:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.sound-eq i:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.sound-eq i:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.sound-eq i:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes eqPulse {
+  0% {
+    transform: scaleY(0.3);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+/* Base cursor behavior */
+body {
+  cursor: default !important;
+}
+* {
+  cursor: auto;
+}
+a,
+button,
+[role="button"] {
+  cursor: pointer !important;
+}
