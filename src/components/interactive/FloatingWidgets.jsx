@@ -44,11 +44,11 @@ export default function FloatingWidgets() {
 
       {/* Floating Zalo Chat Button with Pulse Ring */}
       <a
-        href="https://zalo.me/0393312336"
+        href="https://zalo.me/0813044817"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat Zalo với TDDTech"
-        title="Chat Zalo với TDDTech: 0393312336"
+        aria-label="Chat Zalo với TechRent"
+        title="Chat Zalo với TechRent: 0813044817"
         className="relative flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-110 hover:shadow-primary/50 group"
       >
         {/* Pulse effect */}

@@ -7,7 +7,7 @@ export default function BlogPostPage() {
   const post = blogPosts.find((p) => p.slug === slug) || blogPosts[0];
 
   useEffect(() => {
-    document.title = `${post.title} | Blog TDDTech`;
+    document.title = `${post.title} | Blog TechRent`;
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [post]);
 
@@ -59,11 +59,11 @@ export default function BlogPostPage() {
           Bạn cần tư vấn chiến lược website cho doanh nghiệp?
         </h3>
         <p className="text-sm text-slate-600 dark:text-white/70 mb-6 max-w-xl mx-auto">
-          TDDTech sẵn sàng trao đổi trực tiếp, phân tích hiện trạng và đề xuất giải pháp phù hợp với
+          TechRent sẵn sàng trao đổi trực tiếp, phân tích hiện trạng và đề xuất giải pháp phù hợp với
           mục tiêu kinh doanh của bạn.
         </p>
         <a
-          href="https://zalo.me/0393312336"
+          href="https://zalo.me/0813044817"
           target="_blank"
           rel="noreferrer"
           className="ximi-button inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-bold text-sm shadow-md hover:bg-primary/90 transition-all"

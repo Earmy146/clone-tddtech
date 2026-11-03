@@ -1,135 +1,152 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
 
 export default function VideoShowcase() {
+  const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [scale, setScale] = useState(0.85);
+  const sectionRef = useRef(null);
+  const videoRef = useRef(null);
+
+  // Scroll driven subtle zoom effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Calculate progress of section through viewport
+      const totalDist = windowHeight + rect.height;
+      const currentDist = windowHeight - rect.top;
+      const progress = Math.max(0, Math.min(1, currentDist / totalDist));
+
+      // Scale between 0.82 and 1.0
+      const currentScale = 0.82 + Math.sin(progress * Math.PI) * 0.18;
+      setScale(currentScale);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+        setIsPlaying(true);
+      } else {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      }
+    }
+  };
+
   return (
     <div className="section-videoshowcase">
       <section
         id="phim-gioi-thieu"
-        data-no-motion="true"
-        aria-label="Phim giới thiệu TDDTech"
-        className="relative h-[290svh] bg-slate-50 dark:bg-[hsl(220_40%_6%)]"
+        ref={sectionRef}
+        aria-label="Phim giới thiệu TechRent"
+        className="relative overflow-hidden py-16 sm:py-24 bg-slate-50 dark:bg-[hsl(220_40%_6%)] border-b border-slate-200 dark:border-white/[0.06]"
       >
-        <div className="sticky top-0 h-[100svh] overflow-hidden">
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 z-10 px-4 pt-24 text-center will-change-transform md:pt-28"
-            style={{ opacity: "1", transform: "translate3d(0px, 0px, 0px)" }}
-          >
-            <p className="text-xs font-bold uppercase tracking-[0.26em] text-primary sm:text-sm">
-              Cách TDDTech làm việc
-            </p>
-            <h2
-              data-scroll="read"
-              data-no-motion="true"
-              aria-label="Từ yêu cầu đến sản phẩm doanh nghiệp có thể vận hành"
-              className="mx-auto mt-3 max-w-4xl text-balance text-3xl font-black leading-[1.1] tracking-[-0.03em] text-slate-950 dark:text-white sm:text-5xl sm:leading-[1.15] lg:text-6xl lg:leading-[1.12]"
-              style={{ "--n": "12", "--p": "0" }}
-            >
-              <span aria-hidden="true" className="read-word" style={{ "--i": "0" }}>
-                Từ
-              </span>{" "}
-              <span aria-hidden="true" className="read-word" style={{ "--i": "1" }}>
-                yêu
-              </span>{" "}
-              <span aria-hidden="true" className="read-word" style={{ "--i": "2" }}>
-                cầu
-              </span>{" "}
-              <span aria-hidden="true" className="read-word" style={{ "--i": "3" }}>
-                đến
-              </span>{" "}
-              <span aria-hidden="true" className="read-word" style={{ "--i": "4" }}>
-                sản
-              </span>{" "}
-              <span aria-hidden="true" className="read-word" style={{ "--i": "5" }}>
-                phẩm
-              </span>{" "}
-              <span aria-hidden="true" className="read-word" style={{ "--i": "6" }}>
-                doanh
-              </span>{" "}
-              <span aria-hidden="true" className="read-word" style={{ "--i": "7" }}>
-                nghiệp
-              </span>{" "}
-              <span aria-hidden="true" className="read-word" style={{ "--i": "8" }}>
-                có
-              </span>{" "}
-              <span aria-hidden="true" className="read-word" style={{ "--i": "9" }}>
-                thể
-              </span>{" "}
-              <span aria-hidden="true" className="read-word" style={{ "--i": "10" }}>
-                vận
-              </span>{" "}
-              <span aria-hidden="true" className="read-word" style={{ "--i": "11" }}>
-                hành
-              </span>
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-600 dark:text-white/60 sm:text-base">
-              Cuộn xuống để xem 66 giây về cách TDDTech làm việc.
-            </p>
-          </div>
-          <div
-            className="absolute inset-0 overflow-hidden bg-[#071224] will-change-transform"
-            style={{
-              transformOrigin: "50% 62%",
-              transform: "translate3d(0px, 160px, 0px) scale(0.42)",
-              borderRadius: "66.6667px",
-            }}
-          >
-            <video
-              playsInline
-              loop
-              preload="auto"
-              className="h-full w-full object-cover"
-              poster="/media/tddtech/video/v1/film/brand-film-16x9.jpg"
-              src="/media/tddtech/video/v1/film/brand-film-16x9.mp4"
-            ></video>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20 transition-opacity duration-500 opacity-0"></div>
-            <div className="absolute bottom-6 right-6 flex items-center gap-3 transition-opacity duration-500 md:bottom-10 md:right-10 pointer-events-none opacity-0">
-              <span className="hidden text-sm font-semibold text-white/80 sm:inline">
-                Chạm để bật tiếng
-              </span>
-              <button
-                type="button"
-                aria-label="Bật tiếng phim"
-                className="flex h-14 w-14 items-center justify-center rounded-full bg-white/90 text-slate-950 shadow-lg backdrop-blur transition-transform hover:scale-105"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-volume-x h-6 w-6"
-                >
-                  <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
-                  <line x1="22" x2="16" y1="9" y2="15" />
-                  <line x1="16" x2="22" y1="9" y2="15" />
-                </svg>
-              </button>
-            </div>
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.26em] text-primary sm:text-sm">
+            Cách TechRent làm việc
+          </p>
+          <h2 className="mx-auto mt-3 max-w-4xl text-balance text-2xl font-black leading-[1.15] tracking-[-0.03em] text-slate-950 dark:text-white sm:text-4xl md:text-5xl">
+            Từ yêu cầu đến sản phẩm doanh nghiệp có thể vận hành
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-slate-600 dark:text-white/60 sm:text-base">
+            Khám phá quy trình tư vấn kiến trúc, thiết kế UI/UX độc bản và bàn giao 100% mã nguồn chuẩn tài sản số.
+          </p>
+
+          {/* Interactive Responsive Video Theater */}
+          <div className="relative mx-auto mt-10 max-w-5xl">
             <div
-              className="pointer-events-none absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-2 text-sm font-semibold text-white/75 transition-opacity duration-500 md:bottom-12"
-              style={{ opacity: "0" }}
+              className="relative overflow-hidden rounded-2xl md:rounded-3xl bg-slate-950 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.4)] transition-transform duration-300 ease-out border border-slate-200/50 dark:border-white/10"
+              style={{
+                transform: `scale(${scale})`,
+                aspectRatio: "16/9",
+              }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-arrow-down h-4 w-4 animate-bounce"
-              >
-                <path d="M12 5v14" />
-                <path d="m19 12-7 7-7-7" />
-              </svg>{" "}
-              Cuộn tiếp để bỏ qua
+              <video
+                ref={videoRef}
+                playsInline
+                loop
+                autoPlay
+                muted={isMuted}
+                preload="metadata"
+                className="h-full w-full object-cover cursor-pointer"
+                onClick={togglePlay}
+                poster="/media/techrent/video/v1/film/brand-film-16x9.jpg"
+                src="/media/techrent/video/v1/film/brand-film-16x9.mp4"
+              ></video>
+
+              {/* Ambient overlay */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
+
+              {/* Control Buttons (Bottom Right) */}
+              <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 flex items-center gap-3 z-20">
+                <button
+                  type="button"
+                  onClick={toggleMute}
+                  aria-label={isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
+                  title={isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-slate-950 shadow-xl backdrop-blur transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-white"
+                >
+                  {isMuted ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
+                      <line x1="22" x2="16" y1="9" y2="15" />
+                      <line x1="16" x2="22" y1="9" y2="15" />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" />
+                      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                    </svg>
+                  )}
+                </button>
+              </div>
+
+              {/* Status Indicator (Bottom Left) */}
+              <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 flex items-center gap-2 z-20 pointer-events-none">
+                <span className="flex h-3 w-3 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                </span>
+                <span className="text-xs font-bold text-white/90 uppercase tracking-wider">
+                  Brand Film 4K
+                </span>
+              </div>
             </div>
           </div>
         </div>

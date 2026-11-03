@@ -11,14 +11,14 @@ export default function GenericPage() {
   const pathname = location.pathname;
   const pageData = pagesContent[pathname] ||
     pagesContent["/"] || {
-      title: "TDDTech | Website là tài sản",
+      title: "TechRent | Website là tài sản",
       bodyHtml:
         '<div class="py-24 text-center"><h1 class="text-3xl font-bold">Trang đang được cập nhật</h1></div>',
     };
 
   // Cập nhật Document Title
   useEffect(() => {
-    document.title = pageData.title || "TDDTech - Website là tài sản";
+    document.title = pageData.title || "TechRent - Website là tài sản";
   }, [pageData]);
 
   // Tự động cuộn trang khi đổi route hoặc có hash
@@ -107,7 +107,7 @@ export default function GenericPage() {
             f.question.trim().includes(questionText) || questionText.includes(f.question.trim())
         ) || {
           answer:
-            "TDDTech luôn sẵn sàng tư vấn chi tiết giải pháp phù hợp nhất cho doanh nghiệp của bạn. Vui lòng liên hệ hotline 0393312336 (Zalo).",
+            "TechRent luôn sẵn sàng tư vấn chi tiết giải pháp phù hợp nhất cho doanh nghiệp của bạn. Vui lòng liên hệ hotline 0813044817 (Zalo).",
         };
 
         panel = document.createElement("div");
@@ -142,7 +142,7 @@ export default function GenericPage() {
 
       setTimeout(() => {
         alert(
-          "Cảm ơn bạn! TDDTech đã nhận được thông tin liên hệ và sẽ phản hồi trong vòng 30 phút."
+          "Cảm ơn bạn! TechRent đã nhận được thông tin liên hệ và sẽ phản hồi trong vòng 30 phút."
         );
         form.reset();
         if (submitBtn) {

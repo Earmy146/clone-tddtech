@@ -14,7 +14,7 @@ import ContactSection from "../components/home/ContactSection";
 
 export default function HomePage() {
   useEffect(() => {
-    document.title = "TDDTech | Website là tài sản — xây đúng, vận hành mỗi tháng";
+    document.title = "TechRent | Website là tài sản — xây đúng, vận hành mỗi tháng";
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 

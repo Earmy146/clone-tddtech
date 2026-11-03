@@ -4,7 +4,7 @@ import blogPosts from "../data/blogPosts.json";
 
 export default function BlogListPage() {
   useEffect(() => {
-    document.title = "Blog TDDTech: xây dựng và phát triển tài sản website | TDDTech";
+    document.title = "Blog TechRent: xây dựng và phát triển tài sản website | TechRent";
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
@@ -44,7 +44,7 @@ export default function BlogListPage() {
 
             <p className="text-xs text-slate-600 dark:text-white/60 line-clamp-3 leading-relaxed mb-6">
               {post.excerpt ||
-                "Bài viết phân tích chuyên sâu của TDDTech về chiến lược đầu tư và phát triển website bền vững."}
+                "Bài viết phân tích chuyên sâu của TechRent về chiến lược đầu tư và phát triển website bền vững."}
             </p>
 
             <div className="mt-auto flex items-center gap-1.5 text-xs font-bold text-primary">

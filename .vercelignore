@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.edge-profile/
+temp-edge/
+temp-edge-profile/
+captured/
+inspection/
+preview-shots/

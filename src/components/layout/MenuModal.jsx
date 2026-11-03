@@ -54,12 +54,12 @@ export default function MenuModal({ isOpen, onClose }) {
         <div className="flex items-center justify-between px-6 py-5 md:px-10 md:py-7 border-b border-slate-100 dark:border-white/10">
           <Link to="/" onClick={onClose} className="flex items-center">
             <img
-              alt="TDDTech Logo"
+              alt="TechRent Logo"
               className="h-10 w-auto object-contain md:h-12 block dark:hidden"
               src="/brand/logo-light.png"
             />
             <img
-              alt="TDDTech Logo"
+              alt="TechRent Logo"
               className="h-11 w-auto object-contain md:h-14 hidden dark:block"
               src="/brand/logo-dark.png"
             />
@@ -183,12 +183,12 @@ export default function MenuModal({ isOpen, onClose }) {
           <div className="flex flex-col gap-6">
             <div className="hidden lg:block h-32 w-full">
               <img
-                alt="TDDTech"
+                alt="TechRent"
                 className="h-full w-auto object-contain block dark:hidden"
                 src="/brand/logo-light.png"
               />
               <img
-                alt="TDDTech"
+                alt="TechRent"
                 className="h-full w-auto object-contain hidden dark:block"
                 src="/brand/logo-dark.png"
               />
@@ -198,7 +198,7 @@ export default function MenuModal({ isOpen, onClose }) {
               <h2 className="text-xl font-extrabold leading-tight text-slate-900 dark:text-white md:text-2xl">
                 Website là tài sản.
                 <br />
-                <span className="text-primary">TDDTech giữ nó sinh lời.</span>
+                <span className="text-primary">TechRent giữ nó sinh lời.</span>
               </h2>
             </div>
 
@@ -207,7 +207,7 @@ export default function MenuModal({ isOpen, onClose }) {
                 Thông tin liên hệ
               </p>
               <a
-                href="tel:0393312336"
+                href="tel:0813044817"
                 className="flex items-center gap-3 text-sm text-slate-600 transition-colors hover:text-primary dark:text-white/70"
               >
                 <svg
@@ -224,10 +224,10 @@ export default function MenuModal({ isOpen, onClose }) {
                 >
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
-                <span>0393312336 (Zalo / Hotline)</span>
+                <span>0813044817 (Zalo / Hotline)</span>
               </a>
               <a
-                href="mailto:thieuducdung254@gmail.com"
+                href="mailto:quanhuongngai14062004@gmail.com"
                 className="flex items-center gap-3 text-sm text-slate-600 transition-colors hover:text-primary dark:text-white/70"
               >
                 <svg
@@ -245,7 +245,7 @@ export default function MenuModal({ isOpen, onClose }) {
                   <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </svg>
-                <span>thieuducdung254@gmail.com</span>
+                <span>quanhuongngai14062004@gmail.com</span>
               </a>
               <p className="flex items-start gap-3 text-sm text-slate-600 dark:text-white/70">
                 <svg
@@ -269,7 +269,7 @@ export default function MenuModal({ isOpen, onClose }) {
 
             {/* CTA Button */}
             <a
-              href="https://zalo.me/0393312336"
+              href="https://zalo.me/0813044817"
               target="_blank"
               rel="noreferrer"
               className="ximi-button inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm h-12 w-full rounded-xl bg-primary font-bold text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all"

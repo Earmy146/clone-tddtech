@@ -145,7 +145,7 @@ export default function PricingSection() {
                   </div>
                   <div className="max-w-xs">
                     <a
-                      href="https://zalo.me/0393312336"
+                      href="https://zalo.me/0813044817"
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full px-5 text-sm font-bold transition-colors bg-white text-slate-950 hover:bg-white/90"
@@ -277,7 +277,7 @@ export default function PricingSection() {
                         </div>
                         <p
                           className="flex items-baseline gap-2 font-mono text-white/60"
-                          style={{ opacity: "0" }}
+                          style={{ opacity: "1" }}
                         >
                           <span className="text-3xl font-bold text-white sm:text-4xl [@media(max-height:620px)]:text-2xl">
                             0
@@ -748,8 +748,8 @@ export default function PricingSection() {
                           style={{
                             left: "397.737px",
                             top: "192.11px",
-                            opacity: "0",
-                            transform: "scale(0.6)",
+                            opacity: "1",
+                            transform: "scale(1)",
                           }}
                         >
                           <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-[#0a1424]/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] border-cyan-300/30 py-1.5 pl-1.5 pr-3 text-[13px]">
@@ -777,8 +777,8 @@ export default function PricingSection() {
                           style={{
                             left: "666.263px",
                             top: "192.11px",
-                            opacity: "0",
-                            transform: "scale(0.6)",
+                            opacity: "1",
+                            transform: "scale(1)",
                           }}
                         >
                           <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-[#0a1424]/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] border-cyan-300/30 py-1.5 pl-1.5 pr-3 text-[13px]">
@@ -810,8 +810,8 @@ export default function PricingSection() {
                           style={{
                             left: "666.263px",
                             top: "539.89px",
-                            opacity: "0",
-                            transform: "scale(0.6)",
+                            opacity: "1",
+                            transform: "scale(1)",
                           }}
                         >
                           <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-[#0a1424]/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] border-cyan-300/30 py-1.5 pl-1.5 pr-3 text-[13px]">
@@ -846,8 +846,8 @@ export default function PricingSection() {
                           style={{
                             left: "397.737px",
                             top: "539.89px",
-                            opacity: "0",
-                            transform: "scale(0.6)",
+                            opacity: "1",
+                            transform: "scale(1)",
                           }}
                         >
                           <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-[#0a1424]/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] border-cyan-300/30 py-1.5 pl-1.5 pr-3 text-[13px]">
@@ -878,8 +878,8 @@ export default function PricingSection() {
                           style={{
                             left: "167.707px",
                             top: "284.568px",
-                            opacity: "0",
-                            transform: "scale(0.6)",
+                            opacity: "1",
+                            transform: "scale(1)",
                           }}
                         >
                           <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-[#0a1424]/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] border-sky-400/30 py-1.5 pl-1.5 pr-3 text-[13px]">
@@ -908,8 +908,8 @@ export default function PricingSection() {
                           style={{
                             left: "896.293px",
                             top: "284.568px",
-                            opacity: "0",
-                            transform: "scale(0.6)",
+                            opacity: "1",
+                            transform: "scale(1)",
                           }}
                         >
                           <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-[#0a1424]/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] border-sky-400/30 py-1.5 pl-1.5 pr-3 text-[13px]">
@@ -941,8 +941,8 @@ export default function PricingSection() {
                           style={{
                             left: "896.293px",
                             top: "447.432px",
-                            opacity: "0",
-                            transform: "scale(0.6)",
+                            opacity: "1",
+                            transform: "scale(1)",
                           }}
                         >
                           <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-[#0a1424]/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] border-sky-400/30 py-1.5 pl-1.5 pr-3 text-[13px]">
@@ -974,8 +974,8 @@ export default function PricingSection() {
                           style={{
                             left: "167.707px",
                             top: "447.432px",
-                            opacity: "0",
-                            transform: "scale(0.6)",
+                            opacity: "1",
+                            transform: "scale(1)",
                           }}
                         >
                           <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-[#0a1424]/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] border-sky-400/30 py-1.5 pl-1.5 pr-3 text-[13px]">
@@ -1004,8 +1004,8 @@ export default function PricingSection() {
                           style={{
                             left: "148.916px",
                             top: "163.676px",
-                            opacity: "0",
-                            transform: "scale(0.6)",
+                            opacity: "1",
+                            transform: "scale(1)",
                           }}
                         >
                           <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-[#0a1424]/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] border-violet-400/35 py-1.5 pl-1.5 pr-3 text-[13px]">
@@ -1034,8 +1034,8 @@ export default function PricingSection() {
                           style={{
                             left: "915.084px",
                             top: "163.676px",
-                            opacity: "0",
-                            transform: "scale(0.6)",
+                            opacity: "1",
+                            transform: "scale(1)",
                           }}
                         >
                           <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-[#0a1424]/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] border-violet-400/35 py-1.5 pl-1.5 pr-3 text-[13px]">
@@ -1065,8 +1065,8 @@ export default function PricingSection() {
                           style={{
                             left: "915.084px",
                             top: "568.324px",
-                            opacity: "0",
-                            transform: "scale(0.6)",
+                            opacity: "1",
+                            transform: "scale(1)",
                           }}
                         >
                           <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-[#0a1424]/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] border-violet-400/35 py-1.5 pl-1.5 pr-3 text-[13px]">
@@ -1094,8 +1094,8 @@ export default function PricingSection() {
                           style={{
                             left: "148.916px",
                             top: "568.324px",
-                            opacity: "0",
-                            transform: "scale(0.6)",
+                            opacity: "1",
+                            transform: "scale(1)",
                           }}
                         >
                           <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full border bg-[#0a1424]/90 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.8)] border-violet-400/35 py-1.5 pl-1.5 pr-3 text-[13px]">
@@ -1125,7 +1125,7 @@ export default function PricingSection() {
                           style={{
                             left: "532px",
                             top: "366px",
-                            opacity: "0",
+                            opacity: "1",
                             transform: "scale(0.8)",
                           }}
                         >
@@ -1173,7 +1173,7 @@ export default function PricingSection() {
                         </div>
                         <span
                           className="inline-flex w-fit items-center gap-2 text-[12px] font-bold text-cyan-100 sm:rounded-full sm:border sm:border-cyan-300/30 sm:bg-cyan-300/10 sm:px-4 sm:py-2 sm:text-[13px]"
-                          style={{ opacity: "0" }}
+                          style={{ opacity: "1" }}
                         >
                           Nâng gói bất cứ lúc nào — website không gián đoạn
                         </span>
@@ -1290,7 +1290,7 @@ export default function PricingSection() {
                 </ul>
                 <div className="mt-8">
                   <a
-                    href="https://zalo.me/0393312336"
+                    href="https://zalo.me/0813044817"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full px-5 text-sm font-bold transition-colors bg-slate-950 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-white/90"
@@ -1448,7 +1448,7 @@ export default function PricingSection() {
                 </ul>
                 <div className="mt-8">
                   <a
-                    href="https://zalo.me/0393312336"
+                    href="https://zalo.me/0813044817"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full px-5 text-sm font-bold transition-colors bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/25"
@@ -1585,7 +1585,7 @@ export default function PricingSection() {
                 </ul>
                 <div className="mt-8">
                   <a
-                    href="https://zalo.me/0393312336"
+                    href="https://zalo.me/0813044817"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full px-5 text-sm font-bold transition-colors bg-slate-950 text-white hover:bg-slate-800 dark:bg-white dark:text-slate-950 dark:hover:bg-white/90"
@@ -1606,16 +1606,16 @@ export default function PricingSection() {
                   <strong className="text-slate-950 dark:text-white">
                     Vì sao không niêm yết giá?
                   </strong>{" "}
-                  Chi phí được báo riêng sau khi TDDTech hiểu mục tiêu và hiện trạng của anh chị.
+                  Chi phí được báo riêng sau khi TechRent hiểu mục tiêu và hiện trạng của anh chị.
                   Nhắn Zalo hoặc gọi để nhận báo giá.
                 </p>
                 <p className="text-slate-500 dark:text-white/50">
-                  TDDTech không cam kết một con số doanh thu. Chúng tôi cam kết đầu việc rõ ràng,
+                  TechRent không cam kết một con số doanh thu. Chúng tôi cam kết đầu việc rõ ràng,
                   KPI thống nhất từ đầu và báo cáo minh bạch.
                 </p>
               </div>
               <a
-                href="tel:0393312336"
+                href="tel:0813044817"
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 text-sm font-bold text-slate-800 hover:border-primary hover:text-primary dark:border-white/15 dark:bg-white/[0.04] dark:text-white"
               >
                 <svg
@@ -1632,7 +1632,7 @@ export default function PricingSection() {
                 >
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>{" "}
-                0393312336
+                0813044817
               </a>
             </div>
           </div>

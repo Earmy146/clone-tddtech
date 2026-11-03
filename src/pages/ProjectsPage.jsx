@@ -6,7 +6,7 @@ export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState("ALL");
 
   useEffect(() => {
-    document.title = "Dự án website và web app tiêu biểu | TDDTech";
+    document.title = "Dự án website và web app tiêu biểu | TechRent";
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
@@ -110,7 +110,7 @@ export default function ProjectsPage() {
               </h2>
               <p className="text-xs text-slate-500 dark:text-white/60 line-clamp-2 leading-relaxed mb-4">
                 {item.description ||
-                  "Dự án website tiêu biểu được TDDTech tư vấn, thiết kế giao diện độc quyền và tối ưu chuyển đổi."}
+                  "Dự án website tiêu biểu được TechRent tư vấn, thiết kế giao diện độc quyền và tối ưu chuyển đổi."}
               </p>
 
               {/* Tags */}

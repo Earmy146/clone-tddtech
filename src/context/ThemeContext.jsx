@@ -5,7 +5,7 @@ const ThemeContext = createContext();
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
     try {
-      const saved = localStorage.getItem("tddtech-ui-theme");
+      const saved = localStorage.getItem("techrent-ui-theme");
       if (saved === "dark" || saved === "light") return saved;
       if (window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
     } catch (e) {}
@@ -22,7 +22,7 @@ export function ThemeProvider({ children }) {
         root.classList.add("light");
         root.classList.remove("dark");
       }
-      localStorage.setItem("tddtech-ui-theme", theme);
+      localStorage.setItem("techrent-ui-theme", theme);
     } catch (e) {}
   }, [theme]);
 

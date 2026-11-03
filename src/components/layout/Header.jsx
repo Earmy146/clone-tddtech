@@ -8,6 +8,44 @@ export default function Header({ onOpenMenu }) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isSoundActive, setIsSoundActive] = useState(false);
+
+  // Procedural Web Audio synthesizer
+  const playSynthesizerNote = (freq = 587.33, duration = 0.35) => {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      if (ctx.state === "suspended") ctx.resume();
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + duration);
+    } catch (e) {
+      console.warn("Web Audio not allowed without user interaction", e);
+    }
+  };
+
+  const toggleSound = () => {
+    const nextState = !isSoundActive;
+    setIsSoundActive(nextState);
+    if (nextState) {
+      // Play harmonic chime
+      playSynthesizerNote(587.33, 0.3);
+      setTimeout(() => playSynthesizerNote(880.0, 0.4), 120);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,12 +111,12 @@ export default function Header({ onOpenMenu }) {
             {/* Brand Logo */}
             <Link to="/" className="flex items-center cursor-pointer z-10 py-1">
               <img
-                alt="TDDTech Logo"
+                alt="TechRent Logo"
                 className="w-auto object-contain transition-all duration-300 block dark:hidden h-14 md:h-16 lg:h-18"
                 src="/brand/logo-light.png"
               />
               <img
-                alt="TDDTech Logo"
+                alt="TechRent Logo"
                 className="w-auto object-contain transition-all duration-300 hidden dark:block h-12 md:h-14 lg:h-16"
                 src="/brand/logo-dark.png"
               />
@@ -211,29 +249,50 @@ export default function Header({ onOpenMenu }) {
                 )}
               </button>
 
-              {/* Sound Equalizer Icon Button */}
+              {/* Sound Equalizer Icon Button with procedural audio */}
               <div className="relative">
                 <button
                   type="button"
-                  aria-label="Hiệu ứng âm thanh"
-                  title="TDDTech Sound State"
-                  className="relative flex h-9 w-9 items-center justify-center rounded-full border border-slate-200/90 bg-white/80 p-2 text-slate-700 shadow-sm backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:bg-sky-50/50 hover:text-primary dark:border-white/15 dark:bg-white/5 dark:text-white/80 dark:hover:border-primary/50 dark:hover:bg-white/10 dark:hover:text-primary md:h-10 md:w-10"
+                  onClick={toggleSound}
+                  aria-label={isSoundActive ? "Tắt âm thanh tương tác" : "Bật âm thanh tương tác"}
+                  title={isSoundActive ? "Âm thanh: BẬT (Bấm để tắt)" : "Âm thanh: TẮT (Bấm để bật)"}
+                  className={`relative flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-300 hover:scale-105 md:h-10 md:w-10 ${
+                    isSoundActive
+                      ? "border-primary bg-primary/10 text-primary shadow-[0_0_12px_rgba(0,212,255,0.4)]"
+                      : "border-slate-200/90 bg-white/80 p-2 text-slate-400 shadow-sm backdrop-blur-md hover:border-primary/50 hover:text-primary dark:border-white/15 dark:bg-white/5 dark:text-white/50"
+                  }`}
                 >
                   <span
-                    className="sound-eq is-live flex items-center justify-center gap-[2px]"
+                    className="sound-eq flex items-center justify-center gap-[2px]"
                     aria-hidden="true"
                   >
-                    <i className="inline-block w-[2px] h-3 bg-primary rounded-full animate-pulse"></i>
-                    <i className="inline-block w-[2px] h-4 bg-primary rounded-full animate-bounce"></i>
-                    <i className="inline-block w-[2px] h-2 bg-primary rounded-full animate-pulse"></i>
-                    <i className="inline-block w-[2px] h-3 bg-primary rounded-full"></i>
+                    <i
+                      className={`inline-block w-[2px] rounded-full transition-all ${
+                        isSoundActive ? "bg-primary animate-pulse h-3" : "bg-slate-400 dark:bg-white/40 h-1.5"
+                      }`}
+                    ></i>
+                    <i
+                      className={`inline-block w-[2px] rounded-full transition-all ${
+                        isSoundActive ? "bg-primary animate-bounce h-4" : "bg-slate-400 dark:bg-white/40 h-2"
+                      }`}
+                    ></i>
+                    <i
+                      className={`inline-block w-[2px] rounded-full transition-all ${
+                        isSoundActive ? "bg-primary animate-pulse h-2" : "bg-slate-400 dark:bg-white/40 h-1"
+                      }`}
+                    ></i>
+                    <i
+                      className={`inline-block w-[2px] rounded-full transition-all ${
+                        isSoundActive ? "bg-primary h-3" : "bg-slate-400 dark:bg-white/40 h-1.5"
+                      }`}
+                    ></i>
                   </span>
                 </button>
               </div>
 
               {/* Liên hệ ngay (Desktop) */}
               <a
-                href="https://zalo.me/0393312336"
+                href="https://zalo.me/0813044817"
                 target="_blank"
                 rel="noreferrer"
                 className="ximi-button items-center justify-center gap-2 whitespace-nowrap rounded-md py-2 hidden md:inline-flex bg-primary hover:bg-primary/90 text-white shadow-md hover:shadow-lg transition-all font-bold h-10 px-5 text-sm"
@@ -262,7 +321,7 @@ export default function Header({ onOpenMenu }) {
               {/* Zalo Button (Mobile) */}
               <div className="flex md:hidden items-center gap-1.5">
                 <a
-                  href="https://zalo.me/0393312336"
+                  href="https://zalo.me/0813044817"
                   target="_blank"
                   rel="noreferrer"
                   className="ximi-button justify-center whitespace-nowrap h-8 px-2.5 text-[11px] font-bold bg-primary hover:bg-primary/90 text-white rounded-full shadow-md flex items-center gap-1"

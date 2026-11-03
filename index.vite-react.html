@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi" class="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TechRent | Website là tài sản — xây đúng, vận hành mỗi tháng</title>
+    <meta name="description" content="TechRent xây website doanh nghiệp và website bán hàng như một tài sản: anh chị sở hữu 100%, TechRent bảo vệ, giữ gìn và phát triển để website mang về khách hàng. Bảo hành 5 năm, bảo hành trọn đời với lỗi từ TechRent" />
+    <link rel="icon" href="/brand/mark.png" />
+    <link rel="apple-touch-icon" href="/brand/mark.png" />
+
+    <!-- TechRent Next.js Stylesheets -->
+    <link rel="stylesheet" href="/_next/static/css/ad7b12d0251b1d3b.css" />
+    <link rel="stylesheet" href="/_next/static/css/db35bd7715e6af90.css" />
+    <link rel="stylesheet" href="/_next/static/css/24f47360c3368b38.css" />
+
+    <!-- Script chống flash theme -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('techrent-ui-theme');
+          var dark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

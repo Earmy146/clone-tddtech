@@ -1,6 +1,6 @@
-# TỔNG HỢP CÁC KỸ THUẬT & SKILLS ĐỈNH CAO TRONG TDDTECH
+# TỔNG HỢP CÁC KỸ THUẬT & SKILLS ĐỈNH CAO TRONG CAQTECH
 
-Tài liệu này đúc kết toàn bộ các kỹ thuật chuyên sâu (Skills), kiến trúc và bí quyết công nghệ mà website **TDDTech** đã ứng dụng để tạo nên trải nghiệm đồ họa 3D, hiệu ứng chuyển động mượt mà và giao diện hiện đại hàng đầu.
+Tài liệu này đúc kết toàn bộ các kỹ thuật chuyên sâu (Skills), kiến trúc và bí quyết công nghệ mà website **TechRent** đã ứng dụng để tạo nên trải nghiệm đồ họa 3D, hiệu ứng chuyển động mượt mà và giao diện hiện đại hàng đầu.
 
 ---
 
@@ -94,7 +94,7 @@ Tài liệu này đúc kết toàn bộ các kỹ thuật chuyên sâu (Skills),
     <script>
       (function() {
         try {
-          var saved = localStorage.getItem('tddtech-ui-theme');
+          var saved = localStorage.getItem('techrent-ui-theme');
           var dark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
           document.documentElement.className = dark ? 'dark' : 'light';
         } catch(e) {}

@@ -1,1116 +1,285 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import * as THREE from "three";
 import { Link } from "react-router-dom";
 
+const STAGES = [
+  {
+    id: "01",
+    tag: "Chi phí",
+    title: "Làm một lần rồi bỏ đó",
+    desc: "Phần lớn chủ doanh nghiệp coi website là khoản chi phí bắt buộc phải có, giao dịch xong là hết việc. Không ai cập nhật nội dung, không ai theo dõi lỗi hay đo lường chuyển đổi.",
+    metric: "0 Đơn",
+    metricLabel: "Khách hàng mới phát sinh",
+    statusBadge: "Lãng phí ngân sách",
+    badgeColor: "bg-rose-500/10 text-rose-500 border-rose-500/20",
+  },
+  {
+    id: "02",
+    tag: "Bỏ quên",
+    title: "Chậm dần & rớt khỏi Google",
+    desc: "Hệ thống không được bảo trì sẽ phát sinh lỗi bảo mật, tốc độ tải trang chậm chạp, thứ hạng SEO rơi tự do. Sau 1-2 năm, doanh nghiệp buộc phải đập đi xây lại từ đầu.",
+    metric: "-80%",
+    metricLabel: "Lưu lượng truy cập tự nhiên",
+    statusBadge: "Rủi ro bảo mật & SEO",
+    badgeColor: "bg-amber-500/10 text-amber-500 border-amber-500/20",
+  },
+  {
+    id: "03",
+    tag: "Tài sản",
+    title: "Doanh nghiệp sở hữu 100%",
+    desc: "TechRent bàn giao trọn vẹn toàn bộ mã nguồn sạch, database, tên miền và hạ tầng đám mây đứng tên pháp lý công ty. Không bị trói buộc, không phụ thuộc nền tảng đóng.",
+    metric: "100%",
+    metricLabel: "Quyền sở hữu pháp lý & mã nguồn",
+    statusBadge: "Tài sản số an toàn",
+    badgeColor: "bg-primary/10 text-primary border-primary/20",
+  },
+  {
+    id: "04",
+    tag: "Vận hành",
+    title: "Sinh lời bền vững mỗi tháng",
+    desc: "Như vàng hay bất động sản, website được chăm sóc, tối ưu tốc độ, giám sát 24/7 và nâng cấp liên tục sẽ trở thành cỗ máy tự động thu hút khách hàng tiềm năng về cho doanh nghiệp.",
+    metric: "+142%",
+    metricLabel: "Tăng trưởng khách hàng mỗi quý",
+    statusBadge: "Vận hành sinh lời",
+    badgeColor: "bg-emerald-500/10 text-emerald-500 border-emerald-500/20",
+  },
+];
+
 export default function AssetPhilosophy() {
+  const [activeStage, setActiveStage] = useState(2); // Default to 'Tài sản'
+  const canvasContainerRef = useRef(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
+
+  // Real Three.js 3D WebGL Particle Sphere & Cyber Globe
+  useEffect(() => {
+    const container = canvasContainerRef.current;
+    if (!container) return;
+
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    // 1. Scene, Camera, Renderer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+    camera.position.z = 240;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    // 2. Cyber Particle Sphere
+    const particleCount = 1800;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    const radius = 80;
+    const colorCyan = new THREE.Color("#00d4ff");
+    const colorLime = new THREE.Color("#d4ff3f");
+
+    for (let i = 0; i < particleCount; i++) {
+      // Golden spiral distribution on sphere surface
+      const phi = Math.acos(-1 + (2 * i) / particleCount);
+      const theta = Math.sqrt(particleCount * Math.PI) * phi;
+
+      const x = radius * Math.cos(theta) * Math.sin(phi);
+      const y = radius * Math.sin(theta) * Math.sin(phi);
+      const z = radius * Math.cos(phi);
+
+      positions[i * 3] = x + (Math.random() - 0.5) * 4;
+      positions[i * 3 + 1] = y + (Math.random() - 0.5) * 4;
+      positions[i * 3 + 2] = z + (Math.random() - 0.5) * 4;
+
+      const mixedColor = colorCyan.clone().lerp(colorLime, Math.random() * 0.4);
+      colors[i * 3] = mixedColor.r;
+      colors[i * 3 + 1] = mixedColor.g;
+      colors[i * 3 + 2] = mixedColor.b;
+    }
+
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+      size: 2.2,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.85,
+      blending: THREE.AdditiveBlending,
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // 3. Glowing Orbital Ring
+    const ringGeo = new THREE.RingGeometry(88, 89, 64);
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: 0x00d4ff,
+      side: THREE.DoubleSide,
+      transparent: true,
+      opacity: 0.25,
+    });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = Math.PI / 3;
+    scene.add(ring);
+
+    // Mouse parallax tracking
+    const handleMouseMove = (e) => {
+      const rect = container.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+      mouseRef.current = { x, y };
+    };
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+
+    // Handle Resize
+    const handleResize = () => {
+      if (!container) return;
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    };
+    window.addEventListener("resize", handleResize);
+
+    // 4. Render loop
+    let animId;
+    const animate = () => {
+      particles.rotation.y += 0.0035;
+      particles.rotation.x += 0.001;
+      ring.rotation.z += 0.002;
+
+      // Subtle mouse follow
+      camera.position.x += (mouseRef.current.x * 20 - camera.position.x) * 0.05;
+      camera.position.y += (mouseRef.current.y * 20 - camera.position.y) * 0.05;
+      camera.lookAt(scene.position);
+
+      renderer.render(scene, camera);
+      animId = requestAnimationFrame(animate);
+    };
+    animate();
+
+    // Cleanup
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", handleResize);
+      if (container && renderer.domElement) {
+        container.removeChild(renderer.domElement);
+      }
+      geometry.dispose();
+      material.dispose();
+      ringGeo.dispose();
+      ringMat.dispose();
+      renderer.dispose();
+    };
+  }, []);
+
+  const cur = STAGES[activeStage];
+
   return (
     <div className="section-assetphilosophy">
       <section
         id="tai-san"
-        data-no-motion="true"
         aria-label="Chi phí hay tài sản"
-        className="measure-height relative h-[500svh] bg-[#f4f6f9] dark:bg-[#0a0f18] lg:h-[540svh]"
+        className="relative overflow-hidden py-20 sm:py-28 bg-[#f4f6f9] dark:bg-[#0a0f18] border-b border-slate-200 dark:border-white/[0.06]"
       >
-        <h2 className="sr-only">Chi phí hay tài sản?</h2>
-        <p className="sr-only">
-          Phần lớn chủ doanh nghiệp coi website là chi phí: làm một lần rồi bỏ đó, website chậm dần,
-          rớt khỏi Google và phải làm lại. Người coi website là tài sản thì có khách đều mỗi tháng —
-          như vàng, nhà đất, cổ phiếu, tài sản được giữ gìn thì sinh lời. TDDTech bảo vệ, giữ gìn và
-          phát triển website của anh chị mỗi tháng.
-        </p>
-        <div aria-hidden="true" className="sticky top-0 h-[100svh] overflow-hidden">
-          <div className="absolute inset-0 z-0" style={{ opacity: "1", transform: "none" }}>
-            <canvas
-              className="absolute inset-0 h-full w-full"
-              data-engine="three.js r160"
-              width="1720"
-              height="1000"
-            ></canvas>
-          </div>
-          <div className="absolute z-10" style={{ left: "72px", top: "154px", width: "597.222px" }}>
-            <div className="grid text-[11px] font-bold uppercase tracking-[0.28em] text-slate-500 dark:text-white/50 sm:text-xs">
-              <span
-                className="col-start-1 row-start-1 flex items-center gap-3"
-                style={{ opacity: "0" }}
-              >
-                <span className="h-px w-8 bg-current"></span>01 — Chi phí
-              </span>
-              <span
-                className="col-start-1 row-start-1 flex items-center gap-3"
-                style={{ opacity: "0" }}
-              >
-                <span className="h-px w-8 bg-current"></span>02 — Bỏ quên
-              </span>
-            </div>
-            <p
-              className="mt-4 font-black leading-[1.08] tracking-[-0.035em] text-[#0b1220] dark:text-white"
-              style={{ fontSize: "61.92px" }}
-            >
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  Phần
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  lớn
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  chủ
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  doanh
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  nghiệp
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  coi
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  website
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  là
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  <span className="relative inline-block text-slate-400 dark:text-white/40">
-                    chi phí.
-                    <span
-                      className="absolute -inset-x-[0.04em] top-[54%] h-[0.085em] origin-left rounded-full bg-[#0b1220] dark:bg-white"
-                      style={{ transform: "scaleX(0)" }}
-                    ></span>
-                  </span>
-                </span>
-              </span>
+        <div className="container relative mx-auto px-4 z-10">
+          {/* Header titles */}
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.24em] text-primary sm:text-sm">
+              <span className="h-2 w-2 rounded-full bg-primary animate-ping"></span>
+              Góc nhìn khác biệt
+            </span>
+            <h2 className="mt-4 text-3xl font-black leading-[1.1] tracking-[-0.03em] text-slate-900 dark:text-white sm:text-5xl md:text-6xl">
+              Website là <span className="text-primary underline decoration-primary/30 decoration-wavy">Chi phí</span> hay{" "}
+              <span className="text-[#d4ff3f] bg-slate-900 px-3 py-1 rounded-lg dark:bg-white dark:text-slate-950 inline-block rotate-[-1deg]">
+                Tài sản
+              </span>?
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-600 dark:text-white/70 sm:text-lg">
+              Người coi website là chi phí thì tốn tiền làm lại mỗi năm. Người coi website là tài sản thì
+              được bảo vệ, giữ gìn và có khách hàng mới mang về doanh thu mỗi tháng.
             </p>
-            <div className="mt-3 grid max-w-md text-[14.5px] leading-[1.55] text-slate-600 dark:text-white/60 sm:mt-5 sm:text-[17px] sm:leading-[1.65]">
-              <p
-                className="col-start-1 row-start-1"
-                style={{ opacity: "0", transform: "translateY(18px)" }}
-              >
-                Làm một lần cho xong, ghi vào sổ như mọi khoản chi khác — rồi cất đi.
-              </p>
-              <p
-                className="col-start-1 row-start-1"
-                style={{ opacity: "0", transform: "translateY(18px)" }}
-              >
-                Không ai trông nom: năm đầu chậm dần, năm sau rớt khỏi Google, năm thứ ba phải làm
-                lại từ đầu.
-              </p>
-            </div>
           </div>
-          <div
-            className="absolute z-10 grid text-white"
-            style={{ left: "72px", top: "154px", width: "597.222px" }}
-          >
-            <div className="col-start-1 row-start-1">
-              <p
-                className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.28em] text-cyan-200/80 sm:text-xs"
-                style={{ opacity: "0" }}
-              >
-                <span className="h-px w-8 bg-current"></span>03 — Tài sản
-              </p>
-              <p
-                className="mt-4 font-black leading-[1.08] tracking-[-0.035em]"
-                style={{ fontSize: "61.92px" }}
-              >
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
+
+          {/* Main Interactive Stage Grid */}
+          <div className="mt-14 grid gap-10 lg:grid-cols-12 lg:items-center">
+            {/* Left: 4 Stages Interactive Selectors & Active Card (7 cols) */}
+            <div className="lg:col-span-7 space-y-6">
+              {/* Tab selectors */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                {STAGES.map((s, idx) => (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => setActiveStage(idx)}
+                    className={`flex flex-col text-left p-3.5 rounded-xl border transition-all duration-300 ${
+                      activeStage === idx
+                        ? "border-primary bg-white shadow-lg dark:bg-white/10 dark:border-primary text-slate-900 dark:text-white scale-102"
+                        : "border-slate-200/80 bg-white/50 hover:bg-white dark:border-white/5 dark:bg-white/[0.03] text-slate-500 dark:text-white/45 hover:text-slate-900 dark:hover:text-white"
+                    }`}
                   >
-                    Người
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    coi
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    nó
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    là
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    <span className="relative inline-block">
-                      tài sản
-                      <span
-                        aria-hidden="true"
-                        className="absolute inset-0 select-none"
-                        style={{ clipPath: "inset(-30% 114% -30% -14%)" }}
-                      >
-                        <span className="absolute -inset-x-[0.12em] bottom-[0.02em] top-[0.14em] -rotate-2 rounded-sm bg-[#d4ff3f]"></span>
-                        <span className="relative text-[#0f172a]">tài sản</span>
-                      </span>
+                    <span className="text-[11px] font-black tracking-widest uppercase opacity-70">
+                      {s.id}
                     </span>
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
+                    <span className="text-sm font-bold mt-1">{s.tag}</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Active stage details card */}
+              <div className="rounded-2xl border border-slate-200/90 bg-white/90 p-6 sm:p-8 shadow-xl backdrop-blur-md dark:border-white/10 dark:bg-[hsl(220_40%_8%_/_0.9)] animate-fadeIn">
+                <div className="flex items-center justify-between gap-4 flex-wrap">
                   <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${cur.badgeColor}`}
                   >
-                    thì
+                    <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse"></span>
+                    {cur.statusBadge}
                   </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    có
+                  <span className="text-xs font-bold text-slate-400 dark:text-white/40 uppercase tracking-widest">
+                    Giai đoạn {cur.id} / 04
                   </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    khách
+                </div>
+
+                <h3 className="mt-4 text-2xl font-black text-slate-900 dark:text-white sm:text-3xl">
+                  {cur.title}
+                </h3>
+                <p className="mt-3 text-base leading-7 text-slate-600 dark:text-white/70">
+                  {cur.desc}
+                </p>
+
+                {/* Highlight Metric */}
+                <div className="mt-6 pt-6 border-t border-slate-100 dark:border-white/[0.08] flex items-baseline gap-4">
+                  <span className="text-3xl sm:text-4xl font-black text-primary">
+                    {cur.metric}
                   </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    đều
+                  <span className="text-sm font-semibold text-slate-500 dark:text-white/60">
+                    {cur.metricLabel}
                   </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    mỗi
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    tháng.
-                  </span>
-                </span>
-              </p>
-              <p
-                className="mt-3 max-w-md text-[14.5px] leading-[1.55] text-white/70 sm:mt-5 sm:text-[17px] sm:leading-[1.65]"
-                style={{ opacity: "0", transform: "translateY(18px)" }}
-              >
-                Như vàng, nhà đất, cổ phiếu: tài sản được giữ gìn thì sinh lời. Website đứng tên
-                doanh nghiệp anh chị và làm việc 24/7.
-              </p>
-            </div>
-            <div className="col-start-1 row-start-1">
-              <p
-                className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.28em] text-cyan-200/80 sm:text-xs"
-                style={{ opacity: "0" }}
-              >
-                <span className="h-px w-8 bg-current"></span>04 — Vận hành
-              </p>
-              <p
-                className="mt-4 font-black leading-[1.08] tracking-[-0.035em]"
-                style={{ fontSize: "61.92px" }}
-              >
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    <span className="text-cyan-300">TDDTech</span>
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    bảo
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    vệ,
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    giữ
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    gìn
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    và
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    phát
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    triển
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    nó
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    —
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    mỗi
-                  </span>
-                </span>{" "}
-                <span className="rise-mask">
-                  <span
-                    className="inline-block"
-                    style={{
-                      transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                      transformOrigin: "50% 100% 0px",
-                    }}
-                  >
-                    tháng.
-                  </span>
-                </span>
-              </p>
-              <p
-                className="mt-3 max-w-md text-[14.5px] leading-[1.55] text-white/70 sm:mt-5 sm:text-[17px] sm:leading-[1.65]"
-                style={{ opacity: "0", transform: "translateY(18px)" }}
-              >
-                Sao lưu, giám sát, cập nhật, SEO và nội dung — báo cáo số liệu thật ngày 1 hằng
-                tháng.
-              </p>
-            </div>
-          </div>
-          <div
-            data-anchor="slabTR"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <div className="-translate-x-full -translate-y-full pb-2 pr-1" style={{ opacity: "0" }}>
-              <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-[11px] font-bold shadow-[0_12px_30px_-12px_rgba(15,23,42,0.5)] sm:text-xs bg-white text-slate-800 ring-1 ring-slate-200">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-search h-3.5 w-3.5 text-slate-500"
-                >
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.3-4.3" />
-                </svg>
-                Google
-                <span className="relative inline-grid">
-                  <span
-                    className="col-start-1 row-start-1 text-emerald-600"
-                    style={{ opacity: "1" }}
-                  >
-                    Trang 1
-                  </span>
-                  <span className="col-start-1 row-start-1 text-rose-600" style={{ opacity: "0" }}>
-                    Trang 3 ↓
-                  </span>
-                </span>
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            data-anchor="slabTL"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <div className="-translate-y-full pb-2" style={{ opacity: "0" }}>
-              <div className="flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-[11px] font-bold shadow-[0_12px_30px_-12px_rgba(15,23,42,0.5)] sm:text-xs bg-rose-50 text-rose-600 ring-1 ring-rose-200">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-triangle-alert h-3.5 w-3.5"
-                >
-                  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
-                  <path d="M12 9v4" />
-                  <path d="M12 17h.01" />
-                </svg>
-                Không bảo mật
-              </div>
-            </div>
-          </div>
-          <div
-            data-anchor="chartTL"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <p
-              className="-translate-y-full whitespace-nowrap pb-1 text-[10px] font-bold uppercase tracking-[0.24em] text-slate-500 dark:text-white/45 sm:text-[11px]"
-              style={{ opacity: "0" }}
-            >
-              Giá trị website theo thời gian
-            </p>
-          </div>
-          <div
-            data-anchor="y0"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <div className="whitespace-nowrap pt-1 " style={{ opacity: "0" }}>
-              <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-800 dark:text-white/85 sm:text-xs sm:tracking-[0.18em]">
-                Bàn giao
-              </p>
-              <p className="text-[10.5px] leading-tight sm:text-[13px]  text-slate-500 dark:text-white/55 ">
-                Mới, nhanh
-              </p>
-            </div>
-          </div>
-          <div
-            data-anchor="y1"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <div
-              className="whitespace-nowrap pt-1 -translate-x-1/2 text-center"
-              style={{ opacity: "0" }}
-            >
-              <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-800 dark:text-white/85 sm:text-xs sm:tracking-[0.18em]">
-                Năm 1
-              </p>
-              <p className="text-[10.5px] leading-tight sm:text-[13px]  text-slate-500 dark:text-white/55 ">
-                Chậm dần
-              </p>
-            </div>
-          </div>
-          <div
-            data-anchor="y2"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <div
-              className="whitespace-nowrap pt-1 -translate-x-1/2 text-center"
-              style={{ opacity: "0" }}
-            >
-              <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-800 dark:text-white/85 sm:text-xs sm:tracking-[0.18em]">
-                Năm 2
-              </p>
-              <p className="text-[10.5px] leading-tight sm:text-[13px]  text-slate-500 dark:text-white/55 ">
-                Rớt Google
-              </p>
-            </div>
-          </div>
-          <div
-            data-anchor="y3"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <div
-              className="whitespace-nowrap pt-1 -translate-x-full text-right"
-              style={{ opacity: "0" }}
-            >
-              <p className="text-[9.5px] font-bold uppercase tracking-[0.1em] text-slate-800 dark:text-white/85 sm:text-xs sm:tracking-[0.18em]">
-                Năm 3
-              </p>
-              <p className="text-[10.5px] leading-tight sm:text-[13px]  font-bold text-rose-700 dark:text-rose-300 ">
-                Phải làm lại
-              </p>
-            </div>
-          </div>
-          <div
-            data-anchor="a0"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <div
-              className="-translate-x-1/2 whitespace-nowrap pt-2 text-center"
-              style={{ opacity: "0" }}
-            >
-              <p className="text-[15px] font-extrabold text-white sm:text-[17px]">Vàng</p>
-              <p className="text-[11px] text-cyan-100/60 sm:text-xs">Cất giữ an toàn</p>
-            </div>
-          </div>
-          <div
-            data-anchor="a1"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <div
-              className="-translate-x-1/2 whitespace-nowrap pt-2 text-center"
-              style={{ opacity: "0" }}
-            >
-              <p className="text-[15px] font-extrabold text-white sm:text-[17px]">Nhà đất</p>
-              <p className="text-[11px] text-cyan-100/60 sm:text-xs">Bảo trì, cho thuê</p>
-            </div>
-          </div>
-          <div
-            data-anchor="a2"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <div
-              className="-translate-x-1/2 whitespace-nowrap pt-2 text-center"
-              style={{ opacity: "0" }}
-            >
-              <p className="text-[15px] font-extrabold text-white sm:text-[17px]">Cổ phiếu</p>
-              <p className="text-[11px] text-cyan-100/60 sm:text-xs">Theo dõi, nắm giữ</p>
-            </div>
-          </div>
-          <div
-            data-anchor="a3"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <div
-              className="-translate-x-1/2 whitespace-nowrap pt-2 text-center"
-              style={{ opacity: "0" }}
-            >
-              <p className="text-[15px] font-extrabold text-white sm:text-[17px]">Website</p>
-              <p className="text-[11px] text-cyan-100/60 sm:text-xs">Vận hành mỗi tháng</p>
-            </div>
-          </div>
-          <div
-            data-anchor="shelfMid"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <p
-              className="-translate-x-1/2 whitespace-nowrap text-[10.5px] font-bold uppercase tracking-[0.2em] text-cyan-100/70 sm:text-xs pt-16"
-              style={{ opacity: "0" }}
-            >
-              Được giữ gìn → giá trị tăng dần
-            </p>
-          </div>
-          <div
-            data-anchor="n0"
-            data-flip="true"
-            className="story-flip pointer-events-none absolute left-0 top-0 z-30 will-change-transform z-[31]"
-          >
-            <div className="story-flip-in -translate-y-1/2" style={{ opacity: "0" }}>
-              <div className="flex items-center gap-2.5 whitespace-nowrap rounded-full border border-cyan-300/25 bg-[#0a1b2e]/90 py-1.5 pl-1.5 pr-4 shadow-[0_14px_34px_-10px_rgba(0,0,0,0.7)]">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-white to-cyan-100 text-[#0369a1] sm:h-9 sm:w-9">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-shield-check h-4 w-4"
-                  >
-                    <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
-                    <path d="m9 12 2 2 4-4" />
-                  </svg>
-                </span>
-                <span className="leading-tight">
-                  <span className="block text-[13px] font-extrabold text-white sm:text-[15px]">
-                    Bảo vệ
-                  </span>
-                  <span className="block text-[10.5px] text-cyan-100/60 sm:text-xs">
-                    Sao lưu · giám sát 24/7
-                  </span>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div
-            data-anchor="n1"
-            data-flip="true"
-            className="story-flip pointer-events-none absolute left-0 top-0 z-30 will-change-transform z-[31]"
-          >
-            <div className="story-flip-in -translate-y-1/2" style={{ opacity: "0" }}>
-              <div className="flex items-center gap-2.5 whitespace-nowrap rounded-full border border-cyan-300/25 bg-[#0a1b2e]/90 py-1.5 pl-1.5 pr-4 shadow-[0_14px_34px_-10px_rgba(0,0,0,0.7)]">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-white to-cyan-100 text-[#0369a1] sm:h-9 sm:w-9">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-wrench h-4 w-4"
-                  >
-                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-                  </svg>
-                </span>
-                <span className="leading-tight">
-                  <span className="block text-[13px] font-extrabold text-white sm:text-[15px]">
-                    Giữ gìn
-                  </span>
-                  <span className="block text-[10.5px] text-cyan-100/60 sm:text-xs">
-                    Cập nhật · sửa lỗi
-                  </span>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div
-            data-anchor="n2"
-            data-flip="true"
-            className="story-flip pointer-events-none absolute left-0 top-0 z-30 will-change-transform z-[31]"
-          >
-            <div className="story-flip-in -translate-y-1/2" style={{ opacity: "0" }}>
-              <div className="flex items-center gap-2.5 whitespace-nowrap rounded-full border border-cyan-300/25 bg-[#0a1b2e]/90 py-1.5 pl-1.5 pr-4 shadow-[0_14px_34px_-10px_rgba(0,0,0,0.7)]">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-white to-cyan-100 text-[#0369a1] sm:h-9 sm:w-9">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-trending-up h-4 w-4"
-                  >
-                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
-                    <polyline points="16 7 22 7 22 13" />
-                  </svg>
-                </span>
-                <span className="leading-tight">
-                  <span className="block text-[13px] font-extrabold text-white sm:text-[15px]">
-                    Phát triển
-                  </span>
-                  <span className="block text-[10.5px] text-cyan-100/60 sm:text-xs">
-                    SEO · nội dung
-                  </span>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div
-            data-anchor="monthL"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform"
-          >
-            <div
-              className="whitespace-nowrap pt-3 text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-100/60 sm:text-[11px]"
-              style={{ opacity: "0" }}
-            >
-              Khách hỏi qua website · mỗi tháng{" "}
-              <span className="ml-2 font-medium normal-case tracking-normal text-white/35">
-                minh hoạ
-              </span>
-            </div>
-          </div>
-          <div
-            data-anchor="slabR"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform z-[35]"
-          >
-            <div
-              className="-translate-x-[40px] -translate-y-[60px]"
-              style={{
-                width: "268px",
-                opacity: "0",
-                transform: "translateX(60px)",
-              }}
-            >
-              <div className="flex items-center gap-3 rounded-[14px] bg-white/95 p-2.5 shadow-[0_18px_40px_-14px_rgba(0,0,0,0.6)] ring-1 ring-black/5">
-                <span className="h-8 w-8 flex-none">
-                  <img alt="" className="h-full w-full rounded-[7px]" src="/zalo-icon.png" />
-                </span>
-                <span className="min-w-0 flex-1 leading-tight">
-                  <span className="block truncate text-[12.5px] font-bold text-slate-900 sm:text-[13px]">
-                    Khách hỏi giá qua Zalo
-                  </span>
-                  <span className="block truncate text-[11px] text-slate-500 sm:text-xs">
-                    Từ website · vừa xong
-                  </span>
-                </span>
-                <span className="self-start text-[10px] text-slate-400">vừa xong</span>
-              </div>
-            </div>
-          </div>
-          <div
-            data-anchor="slabR"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform z-[35]"
-          >
-            <div
-              className="-translate-x-[40px] -translate-y-[60px]"
-              style={{
-                width: "268px",
-                opacity: "0",
-                transform: "translateX(60px)",
-              }}
-            >
-              <div className="flex items-center gap-3 rounded-[14px] bg-white/95 p-2.5 shadow-[0_18px_40px_-14px_rgba(0,0,0,0.6)] ring-1 ring-black/5">
-                <span className="h-8 w-8 flex-none">
-                  <span className="flex h-full w-full items-center justify-center rounded-[7px] bg-emerald-500 text-white">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-shopping-bag h-4 w-4"
-                    >
-                      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-                      <path d="M3 6h18" />
-                      <path d="M16 10a4 4 0 0 1-8 0" />
-                    </svg>
-                  </span>
-                </span>
-                <span className="min-w-0 flex-1 leading-tight">
-                  <span className="block truncate text-[12.5px] font-bold text-slate-900 sm:text-[13px]">
-                    Đơn hàng mới
-                  </span>
-                  <span className="block truncate text-[11px] text-slate-500 sm:text-xs">
-                    2 sản phẩm · thanh toán khi nhận
-                  </span>
-                </span>
-                <span className="self-start text-[10px] text-slate-400">vừa xong</span>
-              </div>
-            </div>
-          </div>
-          <div
-            data-anchor="slabR"
-            className="pointer-events-none absolute left-0 top-0 z-30 will-change-transform z-[35]"
-          >
-            <div
-              className="-translate-x-[40px] -translate-y-[60px]"
-              style={{
-                width: "268px",
-                opacity: "0",
-                transform: "translateX(60px)",
-              }}
-            >
-              <div className="flex items-center gap-3 rounded-[14px] bg-white/95 p-2.5 shadow-[0_18px_40px_-14px_rgba(0,0,0,0.6)] ring-1 ring-black/5">
-                <span className="h-8 w-8 flex-none">
-                  <span className="flex h-full w-full items-center justify-center rounded-[7px] bg-[#0369a1] text-white">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-calendar-check h-4 w-4"
-                    >
-                      <path d="M8 2v4" />
-                      <path d="M16 2v4" />
-                      <rect width="18" height="18" x="3" y="4" rx="2" />
-                      <path d="M3 10h18" />
-                      <path d="m9 16 2 2 4-4" />
-                    </svg>
-                  </span>
-                </span>
-                <span className="min-w-0 flex-1 leading-tight">
-                  <span className="block truncate text-[12.5px] font-bold text-slate-900 sm:text-[13px]">
-                    Lịch hẹn tư vấn
-                  </span>
-                  <span className="block truncate text-[11px] text-slate-500 sm:text-xs">
-                    Đặt qua website · thứ Ba 9:30
-                  </span>
-                </span>
-                <span className="self-start text-[10px] text-slate-400">vừa xong</span>
-              </div>
-            </div>
-          </div>
-          <div
-            className="pointer-events-none absolute inset-0 z-40 flex items-center justify-center"
-            style={{ transform: "none" }}
-          >
-            <img
-              alt=""
-              width="360"
-              height="360"
-              className="h-32 w-32 drop-shadow-[0_18px_40px_rgba(0,161,207,0.35)] md:h-[168px] md:w-[168px]"
-              src="/brand/mark.png"
-              style={{ opacity: "0" }}
-            />
-            <p
-              className="absolute inset-x-0 top-[calc(50%+86px)] px-4 text-center text-2xl font-black tracking-[-0.02em] text-white md:top-[calc(50%+112px)] md:text-4xl"
-              style={{ opacity: "0" }}
-            >
-              Website là tài sản. <span className="accent-serif text-cyan-300">TDDTech</span> giữ nó
-              sinh lời.
-            </p>
-          </div>
-          <div
-            className="pointer-events-none absolute inset-x-0 z-40 px-5 text-center"
-            style={{ top: "480px" }}
-          >
-            <p className="mx-auto max-w-3xl text-[clamp(1.7rem,4.6vw,3.4rem)] font-black leading-[1.08] tracking-[-0.035em] text-[#0b1220] dark:text-white">
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  Ba
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  việc
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  TDDTech
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  làm
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  cho
-                </span>
-              </span>{" "}
-              <span className="rise-mask">
-                <span
-                  className="inline-block"
-                  style={{
-                    transform: "perspective(700px) translateY(140%) rotateX(72deg)",
-                    transformOrigin: "50% 100% 0px",
-                  }}
-                >
-                  <span className="accent-serif text-primary">anh chị</span>
-                </span>
-              </span>
-            </p>
-            <div
-              className="mt-6 flex flex-col items-center gap-2 text-slate-500 dark:text-white/55"
-              style={{ opacity: "0" }}
-            >
-              <span className="text-[11px] font-bold uppercase tracking-[0.28em] sm:text-xs">
-                Xây dựng · Bán hàng · Vận hành
-              </span>
-              <span className="story-scroll-cue" aria-hidden="true">
-                <i></i>
-              </span>
-            </div>
-          </div>
-          <div
-            className="pointer-events-none absolute bottom-2.5 left-1/2 z-50 -translate-x-1/2 sm:bottom-7"
-            style={{ opacity: "0" }}
-          >
-            <div className="grid">
+
+            {/* Right: Three.js 3D WebGL Canvas Interactive Viewport (5 cols) */}
+            <div className="lg:col-span-5 relative flex items-center justify-center">
               <div
-                className="col-start-1 row-start-1 flex gap-2 sm:gap-3 text-slate-700 dark:text-white/80"
-                style={{ opacity: "1" }}
+                ref={canvasContainerRef}
+                className="relative h-[340px] sm:h-[420px] w-full max-w-[440px] rounded-3xl overflow-hidden border border-slate-200/60 bg-gradient-to-b from-white/40 to-slate-100/30 shadow-2xl backdrop-blur-xl dark:border-white/10 dark:from-white/[0.05] dark:to-transparent"
+                style={{ cursor: "crosshair" }}
               >
-                <div className="w-[19vw] max-w-[112px] sm:w-[112px]">
-                  <p className="mb-1.5 truncate text-[9.5px] font-bold uppercase tracking-[0.14em] sm:text-[10.5px] sm:tracking-[0.16em]">
-                    <span className="hidden sm:inline">01 </span>Chi phí
-                  </p>
-                  <div className="h-[2px] overflow-hidden rounded-full bg-slate-900/10 dark:bg-white/15">
-                    <div
-                      className="h-full origin-left bg-slate-900 dark:bg-white"
-                      style={{ transform: "scaleX(0)" }}
-                    ></div>
-                  </div>
+                {/* Overlay helper badges */}
+                <div className="absolute top-4 left-4 z-10 pointer-events-none">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-900/80 px-2.5 py-1 text-[11px] font-bold text-primary backdrop-blur dark:bg-white/10">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+                    WebGL Three.js 3D Sphere
+                  </span>
                 </div>
-                <div className="w-[19vw] max-w-[112px] sm:w-[112px]">
-                  <p className="mb-1.5 truncate text-[9.5px] font-bold uppercase tracking-[0.14em] sm:text-[10.5px] sm:tracking-[0.16em]">
-                    <span className="hidden sm:inline">02 </span>Bỏ quên
-                  </p>
-                  <div className="h-[2px] overflow-hidden rounded-full bg-slate-900/10 dark:bg-white/15">
-                    <div
-                      className="h-full origin-left bg-slate-900 dark:bg-white"
-                      style={{ transform: "scaleX(0)" }}
-                    ></div>
-                  </div>
-                </div>
-                <div className="w-[19vw] max-w-[112px] sm:w-[112px]">
-                  <p className="mb-1.5 truncate text-[9.5px] font-bold uppercase tracking-[0.14em] sm:text-[10.5px] sm:tracking-[0.16em]">
-                    <span className="hidden sm:inline">03 </span>Tài sản
-                  </p>
-                  <div className="h-[2px] overflow-hidden rounded-full bg-slate-900/10 dark:bg-white/15">
-                    <div
-                      className="h-full origin-left bg-slate-900 dark:bg-white"
-                      style={{ transform: "scaleX(0)" }}
-                    ></div>
-                  </div>
-                </div>
-                <div className="w-[19vw] max-w-[112px] sm:w-[112px]">
-                  <p className="mb-1.5 truncate text-[9.5px] font-bold uppercase tracking-[0.14em] sm:text-[10.5px] sm:tracking-[0.16em]">
-                    <span className="hidden sm:inline">04 </span>Vận hành
-                  </p>
-                  <div className="h-[2px] overflow-hidden rounded-full bg-slate-900/10 dark:bg-white/15">
-                    <div
-                      className="h-full origin-left bg-slate-900 dark:bg-white"
-                      style={{ transform: "scaleX(0)" }}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="col-start-1 row-start-1 flex gap-2 sm:gap-3 text-white/85"
-                style={{ opacity: "0" }}
-              >
-                <div className="w-[19vw] max-w-[112px] sm:w-[112px]">
-                  <p className="mb-1.5 truncate text-[9.5px] font-bold uppercase tracking-[0.14em] sm:text-[10.5px] sm:tracking-[0.16em]">
-                    <span className="hidden sm:inline">01 </span>Chi phí
-                  </p>
-                  <div className="h-[2px] overflow-hidden rounded-full bg-white/15">
-                    <div
-                      className="h-full origin-left bg-cyan-300"
-                      style={{ transform: "scaleX(0)" }}
-                    ></div>
-                  </div>
-                </div>
-                <div className="w-[19vw] max-w-[112px] sm:w-[112px]">
-                  <p className="mb-1.5 truncate text-[9.5px] font-bold uppercase tracking-[0.14em] sm:text-[10.5px] sm:tracking-[0.16em]">
-                    <span className="hidden sm:inline">02 </span>Bỏ quên
-                  </p>
-                  <div className="h-[2px] overflow-hidden rounded-full bg-white/15">
-                    <div
-                      className="h-full origin-left bg-cyan-300"
-                      style={{ transform: "scaleX(0)" }}
-                    ></div>
-                  </div>
-                </div>
-                <div className="w-[19vw] max-w-[112px] sm:w-[112px]">
-                  <p className="mb-1.5 truncate text-[9.5px] font-bold uppercase tracking-[0.14em] sm:text-[10.5px] sm:tracking-[0.16em]">
-                    <span className="hidden sm:inline">03 </span>Tài sản
-                  </p>
-                  <div className="h-[2px] overflow-hidden rounded-full bg-white/15">
-                    <div
-                      className="h-full origin-left bg-cyan-300"
-                      style={{ transform: "scaleX(0)" }}
-                    ></div>
-                  </div>
-                </div>
-                <div className="w-[19vw] max-w-[112px] sm:w-[112px]">
-                  <p className="mb-1.5 truncate text-[9.5px] font-bold uppercase tracking-[0.14em] sm:text-[10.5px] sm:tracking-[0.16em]">
-                    <span className="hidden sm:inline">04 </span>Vận hành
-                  </p>
-                  <div className="h-[2px] overflow-hidden rounded-full bg-white/15">
-                    <div
-                      className="h-full origin-left bg-cyan-300"
-                      style={{ transform: "scaleX(0)" }}
-                    ></div>
-                  </div>
+                <div className="absolute bottom-4 inset-x-4 z-10 pointer-events-none text-center">
+                  <span className="text-[11px] font-semibold text-slate-400 dark:text-white/40">
+                    Rê chuột để xoay và tương tác với quả cầu dữ liệu
+                  </span>
                 </div>
               </div>
             </div>

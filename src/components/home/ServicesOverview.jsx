@@ -110,9 +110,9 @@ export default function ServicesOverview() {
             >
               <div
                 className="text-base md:text-[0.95rem] lg:text-base text-slate-600 dark:text-white/70"
-                style={{ opacity: "0", transform: "translateY(16px)" }}
+                style={{ opacity: "1", transform: "none" }}
               >
-                Một website chỉ là tài sản khi nó được giữ gìn và tạo ra giá trị. TDDTech xây nền
+                Một website chỉ là tài sản khi nó được giữ gìn và tạo ra giá trị. TechRent xây nền
                 móng, rồi đồng hành vận hành để website mang về traffic, khách hàng và đơn hàng.
               </div>
               <svg
@@ -140,10 +140,8 @@ export default function ServicesOverview() {
                 <circle cx="56" cy="50" r="2.5" fill="currentColor" stroke="none" />
                 <g
                   style={{
-                    transform: "translate(0px, 8px)",
-                    opacity: "0",
-                    transition:
-                      "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s",
+                    transform: "none",
+                    opacity: "1",
                   }}
                 >
                   <rect
@@ -159,10 +157,8 @@ export default function ServicesOverview() {
                 </g>
                 <g
                   style={{
-                    transform: "translate(0px, 8px)",
-                    opacity: "0",
-                    transition:
-                      "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s, opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s",
+                    transform: "none",
+                    opacity: "1",
                   }}
                 >
                   <rect
@@ -178,10 +174,8 @@ export default function ServicesOverview() {
                 </g>
                 <g
                   style={{
-                    transform: "translate(0px, 8px)",
-                    opacity: "0",
-                    transition:
-                      "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s, opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s",
+                    transform: "none",
+                    opacity: "1",
                   }}
                 >
                   <path d="M 38 124 H 110" stroke="hsl(var(--primary))" strokeWidth="2" />
@@ -211,7 +205,7 @@ export default function ServicesOverview() {
               <div className="relative aspect-[16/11] overflow-hidden bg-slate-100 dark:bg-white/[0.03]">
                 <div
                   role="img"
-                  aria-label="Minh hoạ: khách tìm 'thiết kế website doanh nghiệp' trên Google, vào TDDTech, bấm Nhận tư vấn và để lại số điện thoại — yêu cầu chuyển thẳng vào Zalo TDDTech."
+                  aria-label="Minh hoạ: khách tìm 'thiết kế website doanh nghiệp' trên Google, vào TechRent, bấm Nhận tư vấn và để lại số điện thoại — yêu cầu chuyển thẳng vào Zalo TechRent."
                   data-live="0"
                   className="x-scene aspect-[16/11] bg-gradient-to-br from-sky-50 to-slate-100 dark:from-[#0b1424] dark:to-[#071019]"
                   data-stage="start"
@@ -261,10 +255,10 @@ export default function ServicesOverview() {
                             className="x-stay -mx-[1.5cqw] rounded-[1.2cqw] px-[1.5cqw] py-[1cqw] [&.on]:bg-sky-500/15"
                           >
                             <p className="text-[2cqw] text-emerald-700 dark:text-emerald-400">
-                              TDDTech › thiet-ke-website
+                              TechRent › thiet-ke-website
                             </p>
                             <p className="text-[2.9cqw] font-semibold leading-tight text-[#1a0dab] dark:text-sky-400">
-                              TDDTech — Website là tài sản của doanh nghiệp
+                              TechRent — Website là tài sản của doanh nghiệp
                             </p>
                             <p className="text-[2cqw] text-slate-500 dark:text-white/50">
                               Xây đúng nền móng, anh chị sở hữu 100%, vận hành mỗi tháng.
@@ -293,7 +287,7 @@ export default function ServicesOverview() {
                             <span className="h-[1.2cqw] w-[1.2cqw] rounded-full bg-slate-300 dark:bg-white/20"></span>
                           </span>
                           <span className="rounded-full bg-slate-100 px-[2cqw] py-[0.3cqw] text-[1.8cqw] text-slate-500 dark:bg-white/5 dark:text-white/50">
-                            TDDTech
+                            TechRent
                           </span>
                         </div>
                         <div className="absolute left-[5%] right-[5%] top-[12%] flex items-center justify-between">
@@ -308,7 +302,7 @@ export default function ServicesOverview() {
                               className="hidden h-[3.6cqw] w-[3.6cqw] dark:block"
                               src="/brand/logo-dark.png"
                             />
-                            TDDTech
+                            TechRent
                           </span>
                           <span className="flex gap-[2.5cqw] text-[1.9cqw] text-slate-500 dark:text-white/50">
                             <span>Dịch vụ</span>
@@ -344,7 +338,7 @@ export default function ServicesOverview() {
                           <img
                             alt=""
                             className="h-full w-full object-cover object-top"
-                            src="/media/tddtech/projects/v2/vinfast-huy-hieu-640.webp"
+                            src="/media/techrent/projects/v2/vinfast-huy-hieu-640.webp"
                           />
                           <span className="absolute bottom-[6%] left-[6%] rounded-full bg-slate-950/75 px-[1.2cqw] py-[0.3cqw] text-[1.5cqw] font-bold text-white">
                             Dự án: VinFast Huy Hiệu
@@ -482,7 +476,7 @@ export default function ServicesOverview() {
                           Nhận tư vấn miễn phí
                         </p>
                         <p className="text-[1.7cqw] text-slate-500 dark:text-white/50">
-                          TDDTech gọi lại qua Zalo
+                          TechRent gọi lại qua Zalo
                         </p>
                         <div className="mt-[2cqw]">
                           <p className="text-[1.7cqw] font-semibold text-slate-600 dark:text-white/60">
@@ -537,7 +531,7 @@ export default function ServicesOverview() {
                         </svg>
                         <span className="text-[1.8cqw] leading-tight">
                           <b className="block text-[2.1cqw]">Yêu cầu tư vấn mới · Anh Minh</b>
-                          Đã chuyển vào Zalo TDDTech · vừa xong
+                          Đã chuyển vào Zalo TechRent · vừa xong
                         </span>
                       </div>
                       <span
@@ -1327,7 +1321,7 @@ export default function ServicesOverview() {
               <div className="relative aspect-[16/11] overflow-hidden bg-slate-100 dark:bg-white/[0.03]">
                 <div
                   role="img"
-                  aria-label="Ví dụ báo cáo tháng: lượt truy cập, khách liên hệ và đơn hàng tăng đều qua 8 tháng, kèm danh sách việc TDDTech đã làm trong tháng."
+                  aria-label="Ví dụ báo cáo tháng: lượt truy cập, khách liên hệ và đơn hàng tăng đều qua 8 tháng, kèm danh sách việc TechRent đã làm trong tháng."
                   data-live="0"
                   className="x-scene aspect-[16/11] bg-gradient-to-br from-sky-50 to-cyan-100 dark:from-slate-950 dark:to-[#0b2a3d]"
                   data-stage="start"

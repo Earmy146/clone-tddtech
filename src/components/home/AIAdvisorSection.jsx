@@ -27,7 +27,7 @@ export default function AIAdvisorSection() {
                   aria-hidden="true"
                   className="h-px w-7 flex-none bg-slate-300 dark:bg-white/20"
                 ></span>
-                <span className="text-balance">TRỢ LÝ THÔNG TIN TDDTech</span>
+                <span className="text-balance">TRỢ LÝ THÔNG TIN TechRent</span>
               </div>
               <h2
                 data-motion="split"
@@ -110,13 +110,11 @@ export default function AIAdvisorSection() {
               </h2>
             </div>
             <p
-              className="mx-auto mt-3 max-w-xl text-sm text-slate-600 dark:text-white/50 md:text-base"
+              className="mx-auto mt-3 max-w-xl text-sm text-slate-600 dark:text-white/70 md:text-base"
               style={{
-                opacity: "0",
-                transform: "translateY(15px)",
-                "--motion-delay": "80ms",
+                opacity: "1",
+                transform: "none",
               }}
-              data-motion="up"
             >
               Hỏi nhanh về phạm vi, cách triển khai, bàn giao hoặc dự án tham khảo
             </p>
@@ -132,10 +130,8 @@ export default function AIAdvisorSection() {
             >
               <g
                 style={{
-                  transform: "translate(0px, 8px)",
-                  opacity: "0",
-                  transition:
-                    "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s",
+                  transform: "none",
+                  opacity: "1",
                 }}
               >
                 <path
@@ -150,10 +146,7 @@ export default function AIAdvisorSection() {
                   strokeWidth="1.5"
                   strokeOpacity="0.55"
                   strokeDasharray="80"
-                  strokeDashoffset="80"
-                  style={{
-                    transition: "stroke-dashoffset 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s",
-                  }}
+                  strokeDashoffset="0"
                 />
                 <path
                   d="M 42 88 H 94"
@@ -164,10 +157,8 @@ export default function AIAdvisorSection() {
               </g>
               <g
                 style={{
-                  transform: "translate(0px, 8px)",
-                  opacity: "0",
-                  transition:
-                    "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s, opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s",
+                  transform: "none",
+                  opacity: "1",
                 }}
               >
                 <path

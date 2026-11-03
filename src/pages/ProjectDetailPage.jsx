@@ -7,7 +7,7 @@ export default function ProjectDetailPage() {
   const project = projectsData.find((p) => p.slug === slug) || projectsData[0];
 
   useEffect(() => {
-    document.title = `${project.title} - Dự án TDDTech đã thực hiện`;
+    document.title = `${project.title} - Dự án TechRent đã thực hiện`;
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [project]);
 
@@ -71,7 +71,7 @@ export default function ProjectDetailPage() {
             )}
 
             <a
-              href="https://zalo.me/0393312336"
+              href="https://zalo.me/0813044817"
               target="_blank"
               rel="noreferrer"
               className="ximi-button inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-bold text-sm shadow-md hover:bg-primary/90 transition-all"
@@ -81,7 +81,7 @@ export default function ProjectDetailPage() {
             </a>
 
             <a
-              href="https://www.facebook.com/dungchuche25"
+              href=""
               target="_blank"
               rel="noreferrer"
               className="ximi-button inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#1877f2] text-white font-bold text-sm shadow-md hover:bg-[#1877f2]/90 transition-all"
@@ -136,7 +136,7 @@ export default function ProjectDetailPage() {
             <span className="h-3 w-3 rounded-full bg-emerald-400/80"></span>
           </div>
           <span className="mx-auto text-xs text-slate-400 dark:text-white/40 font-mono">
-            https://tddtech.vn/du-an/{project.slug}
+            https://techrent.click/du-an/{project.slug}
           </span>
         </div>
         <img src={project.image} alt={project.title} className="w-full object-contain" />

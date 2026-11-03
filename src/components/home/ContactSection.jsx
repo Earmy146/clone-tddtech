@@ -107,17 +107,9 @@ export default function ContactSection() {
                   stroke="hsl(var(--primary) / 0.45)"
                   strokeWidth="1.5"
                   strokeDasharray="5 6"
-                  opacity="0"
-                  style={{
-                    transition: "opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s",
-                  }}
+                  opacity="1"
                 />
-                <g
-                  style={{
-                    opacity: "0",
-                    transition: "opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s",
-                  }}
-                >
+                <g style={{ opacity: "1" }}>
                   <g>
                     <path
                       d="M 78 124 L 34 146 L 52 150 L 46 162 Z"
@@ -135,10 +127,8 @@ export default function ContactSection() {
                 <g
                   style={{
                     transformOrigin: "150px 56px",
-                    transform: "scale(0.6)",
-                    opacity: "0",
-                    transition:
-                      "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.7s, opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.7s",
+                    transform: "none",
+                    opacity: "1",
                   }}
                 >
                   <g transform="translate(150, 56)">
@@ -150,17 +140,17 @@ export default function ContactSection() {
                           width="56"
                           height="36"
                           rx="10"
-                          fill="hsl(var(--art-neon-fill))"
+                          fill="hsl(var(--primary) / 0.2)"
                           stroke="none"
                         />
                         <path
                           d="M 134 74 L 134 84 L 146 74 Z"
-                          fill="hsl(var(--art-neon-fill))"
+                          fill="hsl(var(--primary) / 0.2)"
                           stroke="none"
                         />
                         <path
                           d="M 134 50 H 166 M 134 62 H 154"
-                          stroke="hsl(var(--art-on-neon-fill))"
+                          stroke="hsl(var(--primary))"
                           strokeWidth="1.5"
                         />
                       </g>
@@ -170,15 +160,12 @@ export default function ContactSection() {
                 <text
                   x="46"
                   y="172"
-                  fill="hsl(var(--art-readout))"
+                  fill="currentColor"
                   stroke="none"
                   fontSize="16"
                   fontWeight="800"
                   letterSpacing="-0.3"
-                  style={{
-                    opacity: "0",
-                    transition: "opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.95s",
-                  }}
+                  style={{ opacity: "1" }}
                 >
                   5 phút
                 </text>
@@ -200,13 +187,13 @@ export default function ContactSection() {
                   Gửi website hiện tại hoặc ý tưởng của anh chị.
                 </h3>
                 <p className="mt-4 max-w-md text-sm leading-7 text-white/60 md:text-base">
-                  TDDTech xem trước, rồi đề xuất hướng làm và báo giá riêng.
+                  TechRent xem trước, rồi đề xuất hướng làm và báo giá riêng.
                 </p>
               </div>
               <div className="flex flex-col gap-3 flex-wrap">
                 <div className="ContactChannelPair_pair__7IVaN" data-contact-channel-pair="true">
                   <a
-                    href="https://zalo.me/0393312336"
+                    href="https://zalo.me/0813044817"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex h-14 items-center justify-center gap-2.5 rounded-full bg-primary px-6 text-base font-bold text-white shadow-lg shadow-primary/30 transition-transform hover:-translate-y-0.5"
@@ -215,7 +202,7 @@ export default function ContactSection() {
                     Zalo
                   </a>
                   <a
-                    href="https://www.facebook.com/dungchuche25"
+                    href=""
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Liên hệ qua Facebook"
@@ -234,7 +221,7 @@ export default function ContactSection() {
                   </a>
                 </div>
                 <a
-                  href="tel:0393312336"
+                  href="tel:0813044817"
                   className="inline-flex h-14 items-center justify-center gap-2.5 rounded-full border border-white/20 px-6 text-base font-bold text-white transition-colors hover:bg-white/10"
                 >
                   <svg
@@ -249,7 +236,7 @@ export default function ContactSection() {
                   >
                     <path d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z" />
                   </svg>{" "}
-                  Gọi 0393312336
+                  Gọi 0813044817
                 </a>
               </div>
             </div>

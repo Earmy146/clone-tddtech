@@ -3,12 +3,16 @@ import Header from "./Header";
 import Footer from "./Footer";
 import MenuModal from "./MenuModal";
 import FloatingWidgets from "../interactive/FloatingWidgets";
+import SmoothScroll from "../interactive/SmoothScroll";
+import NeonCursor from "../interactive/NeonCursor";
 
 export default function Layout({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
+      <SmoothScroll />
+      <NeonCursor />
       <Header onOpenMenu={() => setIsMenuOpen(true)} />
       <MenuModal isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 

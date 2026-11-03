@@ -65,7 +65,7 @@ export default function TeamAbout() {
                       className="split-word text-slate-500 dark:text-white/55"
                       style={{ "--i": "3" }}
                     >
-                      TDDTech<span className="sr-only"> </span>
+                      TechRent<span className="sr-only"> </span>
                     </span>
                     <span
                       className="split-word text-slate-500 dark:text-white/55"
@@ -121,7 +121,7 @@ export default function TeamAbout() {
               </div>
               <div className="mt-6 flex flex-col gap-4 md:mt-8 md:pl-[18%] sm:flex-row sm:items-center sm:gap-5">
                 <p className="min-w-0 max-w-md flex-1 border-l-2 border-slate-300 pl-4 text-sm leading-relaxed text-slate-600 dark:border-white/20 dark:text-white/65 md:pl-5 md:text-base">
-                  Anh chị sở hữu 100%. TDDTech bảo vệ, giữ gìn và phát triển để website mang về
+                  Anh chị sở hữu 100%. TechRent bảo vệ, giữ gìn và phát triển để website mang về
                   khách hàng.
                 </p>
                 <svg
@@ -134,14 +134,7 @@ export default function TeamAbout() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <g
-                    style={{
-                      transform: "translate(0px, 12px)",
-                      opacity: "0",
-                      transition:
-                        "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s, opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s",
-                    }}
-                  >
+                  <g style={{ transform: "none", opacity: "1" }}>
                     <rect
                       x="46"
                       y="128"
@@ -153,14 +146,7 @@ export default function TeamAbout() {
                       fill="hsl(var(--primary) / 0.12)"
                     />
                   </g>
-                  <g
-                    style={{
-                      transform: "translate(0px, 12px)",
-                      opacity: "0",
-                      transition:
-                        "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s, opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s",
-                    }}
-                  >
+                  <g style={{ transform: "none", opacity: "1" }}>
                     <rect
                       x="84"
                       y="128"
@@ -172,14 +158,7 @@ export default function TeamAbout() {
                       fill="hsl(var(--primary) / 0.12)"
                     />
                   </g>
-                  <g
-                    style={{
-                      transform: "translate(0px, 12px)",
-                      opacity: "0",
-                      transition:
-                        "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s, opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s",
-                    }}
-                  >
+                  <g style={{ transform: "none", opacity: "1" }}>
                     <rect
                       x="122"
                       y="128"
@@ -191,14 +170,7 @@ export default function TeamAbout() {
                       fill="hsl(var(--primary) / 0.12)"
                     />
                   </g>
-                  <g
-                    style={{
-                      transform: "translate(0px, 12px)",
-                      opacity: "0",
-                      transition:
-                        "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.45s, opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.45s",
-                    }}
-                  >
+                  <g style={{ transform: "none", opacity: "1" }}>
                     <rect
                       x="65"
                       y="94"
@@ -210,14 +182,7 @@ export default function TeamAbout() {
                       fill="hsl(var(--primary) / 0.28)"
                     />
                   </g>
-                  <g
-                    style={{
-                      transform: "translate(0px, 12px)",
-                      opacity: "0",
-                      transition:
-                        "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.55s, opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.55s",
-                    }}
-                  >
+                  <g style={{ transform: "none", opacity: "1" }}>
                     <rect
                       x="103"
                       y="94"
@@ -229,14 +194,7 @@ export default function TeamAbout() {
                       fill="hsl(var(--primary) / 0.28)"
                     />
                   </g>
-                  <g
-                    style={{
-                      transform: "translate(0px, 16px)",
-                      opacity: "0",
-                      transition:
-                        "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.65s, opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.65s",
-                    }}
-                  >
+                  <g style={{ transform: "none", opacity: "1" }}>
                     <g>
                       <rect
                         x="84"
@@ -532,7 +490,7 @@ export default function TeamAbout() {
                   Pháp nhân
                 </dt>
                 <dd className="truncate text-sm font-bold text-slate-900 dark:text-white sm:text-base">
-                  TDDTech
+                  TechRent
                 </dd>
               </div>
             </div>
@@ -560,8 +518,8 @@ export default function TeamAbout() {
                   Liên hệ
                 </dt>
                 <dd className="truncate text-sm font-bold text-slate-900 dark:text-white sm:text-base">
-                  <a href="tel:0393312336" className="hover:text-primary hover:underline">
-                    0393312336
+                  <a href="tel:0813044817" className="hover:text-primary hover:underline">
+                    0813044817
                   </a>
                 </dd>
               </div>
@@ -624,11 +582,11 @@ export default function TeamAbout() {
                       <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary to-cyan-400"></div>
                       <div className="relative h-36 overflow-hidden rounded-[6px] bg-slate-100 dark:bg-[#252a32] sm:h-40">
                         <img
-                          alt="Đội ngũ XimiTech - Giám đốc điều hành XimiTech TDDTech"
+                          alt="Đội ngũ XimiTech - Giám đốc điều hành XimiTech TechRent"
                           className="h-full w-full transition-transform duration-500 group-hover:scale-[1.03] object-cover"
                           loading="lazy"
                           decoding="async"
-                          src="/media/tddtech/company-profile/v1/tranthanhdo.webp"
+                          src="/media/techrent/company-profile/v1/tranthanhdo.webp"
                           style={{ objectPosition: "center bottom" }}
                         />
                       </div>
@@ -676,11 +634,11 @@ export default function TeamAbout() {
                       <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary to-cyan-400"></div>
                       <div className="relative h-36 overflow-hidden rounded-[6px] bg-slate-100 dark:bg-[#252a32] sm:h-40">
                         <img
-                          alt="Đội ngũ TDDTech - Tech Team & Founder TDDTech TDDTech"
+                          alt="Đội ngũ TechRent - Tech Team & Founder TechRent TechRent"
                           className="h-full w-full transition-transform duration-500 group-hover:scale-[1.03] object-contain object-bottom px-1 pt-2"
                           loading="lazy"
                           decoding="async"
-                          src="/media/tddtech/company-profile/v1/myavatar.png"
+                          src="/brand/team.svg"
                           style={{ objectPosition: "center bottom" }}
                         />
                       </div>
@@ -702,10 +660,10 @@ export default function TeamAbout() {
                           </div>
                           <div className="min-w-0">
                             <h4 className="text-base font-extrabold leading-tight text-slate-900 dark:text-white sm:text-lg">
-                              Đội ngũ TDDTech
+                              Đội ngũ TechRent
                             </h4>
                             <p className="mt-1 text-xs font-semibold leading-snug text-primary sm:text-sm">
-                              Tech Team & Founder TDDTech
+                              Tech Team & Founder TechRent
                             </p>
                           </div>
                         </div>

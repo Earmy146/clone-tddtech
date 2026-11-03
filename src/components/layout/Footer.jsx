@@ -13,7 +13,7 @@ export default function Footer() {
           <div data-motion="up" style={{ "--motion-delay": "0ms" }}>
             <Link to="/" className="inline-block">
               <img
-                alt="TDDTech"
+                alt="TechRent"
                 width="256"
                 height="256"
                 className="h-16 w-auto md:h-20"
@@ -22,11 +22,11 @@ export default function Footer() {
               />
             </Link>
             <p className="mt-5 max-w-xs text-xl font-bold leading-snug text-white">
-              Website là tài sản. TDDTech giữ nó sinh lời.
+              Website là tài sản. TechRent giữ nó sinh lời.
             </p>
             <div className="mt-6 flex flex-wrap gap-2.5">
               <a
-                href="https://zalo.me/0393312336"
+                href="https://zalo.me/0813044817"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Zalo"
@@ -35,7 +35,7 @@ export default function Footer() {
                 <img alt="" className="h-5 w-5 rounded object-cover" src="/zalo-icon.png" />
               </a>
               <a
-                href="https://www.facebook.com/dungchuche25"
+                href=""
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -46,7 +46,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://zalo.me/0393312336"
+                href="https://zalo.me/0813044817"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TikTok"
@@ -63,7 +63,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://zalo.me/0393312336"
+                href="https://zalo.me/0813044817"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"
@@ -80,7 +80,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://zalo.me/0393312336"
+                href="https://zalo.me/0813044817"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -231,18 +231,18 @@ export default function Footer() {
             <ul className="mt-5 space-y-4 text-base">
               <li>
                 <a
-                  href="https://zalo.me/0393312336"
+                  href="https://zalo.me/0813044817"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 font-bold text-white hover:text-primary transition-colors"
                 >
                   <img alt="" className="h-5 w-5 rounded" src="/zalo-icon.png" />
-                  Zalo 0393312336
+                  Zalo 0813044817
                 </a>
               </li>
               <li>
                 <a
-                  href="https://www.facebook.com/dungchuche25"
+                  href=""
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-inherit transition-colors hover:text-primary hover:underline"
@@ -250,12 +250,12 @@ export default function Footer() {
                   <svg className="h-5 w-5 flex-none" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M14 22v-9h3l.5-4H14V7c0-1.1.3-2 2-2h2V1.3C17.4 1.1 16.3 1 15 1c-3 0-5 1.8-5 5v3H7v4h3v9h4Z"></path>
                   </svg>
-                  <span>Facebook · Thiều Đức Dũng</span>
+                  <span>Zalo · Cấn Anh Quân</span>
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:0393312336"
+                  href="tel:0813044817"
                   className="flex items-center gap-3 text-white/75 hover:text-white transition-colors"
                 >
                   <svg
@@ -272,12 +272,12 @@ export default function Footer() {
                   >
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                   </svg>
-                  0393312336
+                  0813044817
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:thieuducdung254@gmail.com"
+                  href="mailto:quanhuongngai14062004@gmail.com"
                   className="flex items-center gap-3 break-all text-white/75 hover:text-white transition-colors"
                 >
                   <svg
@@ -295,7 +295,7 @@ export default function Footer() {
                     <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                     <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                   </svg>
-                  thieuducdung254@gmail.com
+                  quanhuongngai14062004@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3 text-white/60">
@@ -321,7 +321,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Large Wordmark "TDDTech" Effect */}
+      {/* Large Wordmark "TechRent" Effect */}
       <div
         data-motion="wordmark"
         aria-hidden="true"
@@ -342,7 +342,7 @@ export default function Footer() {
       {/* Bottom Copyright & Legal Links */}
       <div className="border-t border-white/10">
         <div className="container mx-auto flex flex-col gap-3 px-4 py-6 text-sm text-white/45 md:flex-row md:items-center md:justify-between">
-          <p>© 2026 TDDTech · Thiều Đức Dũng</p>
+          <p>© 2026 TechRent · Cấn Anh Quân</p>
           <div className="flex gap-6">
             <Link to="/privacy-policy" className="hover:text-white transition-colors">
               Chính sách bảo mật
